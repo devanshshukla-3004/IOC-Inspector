@@ -4,8 +4,8 @@ from typing import Iterable
 from .models import IOCType
 
 PATTERNS = {
-    IOCType.URL: re.compile(r"https?://[^\s<>'\"\]\[()]+", re.I),
-    IOCType.EMAIL: re.compile(r"(?<![\w.+-])[\w.+-]+@[\w-]+(?:\.[\w-]+)+(?![\w.-])", re.I),
+    IOCType.URL: re.compile(r"https?://[^\s<>'"\]\[()]+", re.I),
+    IOCType.EMAIL: re.compile(r"(?<![\w.+-])[\w.+-]+@[\w-]+(?:\.[\w-]+)+(?![\w-])", re.I),
     IOCType.HASH_MD5: re.compile(r"(?<![0-9a-f])[0-9a-f]{32}(?![0-9a-f])", re.I),
     IOCType.HASH_SHA1: re.compile(r"(?<![0-9a-f])[0-9a-f]{40}(?![0-9a-f])", re.I),
     IOCType.HASH_SHA256: re.compile(r"(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])", re.I),
