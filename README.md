@@ -666,30 +666,6 @@ The project focuses on practical cybersecurity engineering concepts:
 
 ---
 
-## 🤝 Contributing
-
-Contributions and security-focused improvements are welcome.
-
-A typical workflow:
-
-```bash
-git clone https://github.com/devanshshukla-3004/IOC-Inspector.git
-cd IOC-Inspector
-
-python -m venv .venv
-pip install -r requirements.txt
-
-python -m pytest -q
-```
-
-Before submitting changes:
-
-1. Keep the core analyzer deterministic.
-2. Add tests for new extraction or scoring behavior.
-3. Avoid network calls in the core offline workflow.
-4. Update documentation when CLI behavior changes.
-
----
 
 ## 📄 License
 
