@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from .engine import analyze
+from .engine import analyze, analyze_many
 from .reporter import write_csv, write_json
 
 
@@ -25,17 +25,26 @@ def main() -> None:
     )
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--text", help="Raw text containing indicators")
-    source.add_argument("--file", help="Text file to analyze")
+    source.add_argument("--file", help="Single text file to analyze")
+    source.add_argument("--directory", help="Analyze all .txt/.log files recursively")
     parser.add_argument("--json", dest="json_path", help="Write JSON report")
     parser.add_argument("--csv", dest="csv_path", help="Write CSV report")
     parser.add_argument("--quiet", action="store_true", help="Suppress terminal table")
     args = parser.parse_args()
 
-    text = args.text
-    if args.file:
-        text = Path(args.file).read_text(encoding="utf-8")
+    if args.text:
+        results = analyze(args.text)
+    elif args.file:
+        results = analyze(Path(args.file).read_text(encoding="utf-8"))
+    else:
+        directory = Path(args.directory)
+        files = sorted(
+            p for p in directory.rglob("*")
+            if p.is_file() and p.suffix.lower() in {".txt", ".log"}
+        )
+        results = analyze_many([p.read_text(encoding="utf-8", errors="ignore") for p in files])
+        print(f"Scanned {len(files)} text/log file(s).")
 
-    results = analyze(text or "")
     if not args.quiet:
         _print_table(results)
     if args.json_path:
