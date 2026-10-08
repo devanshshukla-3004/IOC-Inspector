@@ -1,0 +1,4 @@
+Incident excerpt:
+Outbound connection observed to 185.220.101.1 and https://malware.example/download.
+Analyst contact: security@example.org
+SHA256: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
